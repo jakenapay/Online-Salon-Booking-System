@@ -3,9 +3,16 @@ Update
         Booking (Page):
             Display the services (Book Service)
             Account will be save and the date-time.
+
+        Payment (Page):
+            Gets the user's payment after Booking
+            Print receipt and save it to receit table
         
         Admin Side:
             Can see who booked
             Can see users
 
-            
+        Tables:
+            user
+            services
+            receipts

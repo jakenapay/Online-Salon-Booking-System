@@ -11,6 +11,7 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0rem 0.7rem;
 }
 
 #loginSection input,
@@ -23,7 +24,7 @@ label {
 
 
 /* this is the button */
-#loginSection #login {
+#loginSection input[type=submit] {
     width: unset;
     display: unset;
 }
@@ -35,6 +36,9 @@ label {
     border-radius: 50px;
     border-width: 1px;
 
+    outline: none;
+
+
     transition: all .3s;
 }
 
@@ -42,18 +46,18 @@ label {
     border: 1px solid rgb(240, 16, 184);
 }
 
-#loginSection input:focus {
-    border: 1px solid rgb(240, 16, 184);
+#loginSection input[type=text]:focus {
+    border: 1px solid #f010b8;
 }
 
 /* this is the button */
-#loginSection #login {
+#loginSection input[type=submit] {
     padding: 0.2rem 2rem;
     background-color: transparent;
     transition: all .3s;
 }
 
-#loginSection #login:hover {
+#loginSection input[type=submit]:hover {
     border: 1px solid #fff;
     color: #fff;
     background-color: #f010b8;
@@ -71,6 +75,10 @@ label {
 
 #loginSection .divider {
     width: 50%;
-    border: 1px solid #f010b8;
+    border: 1px solid #121212;
     margin: 1rem;
+}
+
+a {
+    color: #f010b8;
 }

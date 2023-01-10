@@ -31,6 +31,21 @@
                     <h4>Sign Up</h4>
                     <form action="process/signup.inc.php" method="post">
                         <div class="input">
+                            <label for="firstname">First Name</label>
+                            <input id="firstname" name="first_name" type="text" required>
+                        </div>
+
+                        <div class="input">
+                            <label for="lastname">Last Name</label>
+                            <input id="lastname" name="last_name" type="text" required>
+                        </div>
+
+                        <div class="input">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" placeholder="09XXXXXXXXX" pattern="[0-9]{11}" required>
+                        </div>
+
+                        <div class="input">
                             <label for="username">Username</label>
                             <input id="username" name="username" type="text" required>
                         </div>
@@ -38,7 +53,7 @@
                             <label for="password">Password</label>
                             <input id="password" name="password" type="password" required>
                         </div>
-                        <input id="login" name="login" type="Submit" value="Login">
+                        <input id="signup" name="signup" type="submit" value="Sign Up">
                     </form>
                     <hr class="divider">
                     <p>Already have an account? Log in <a href="login.php">here</a></p>
