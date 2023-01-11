@@ -23,7 +23,7 @@ session_start();
         <nav class="nav">
             <div class="container-nav">
                 <a href="index.html" style="text-decoration: none;">
-                    <h1 class="nav-logo">TANGINAMO BRIAN</h1>
+                    <h1 class="nav-logo">Raphael </h1>
                 </a>
                 <ul class="menu">
                     <li><a href="index.php" class="active">Home</a></li>
@@ -47,9 +47,15 @@ session_start();
     </header>
     <nav class="mobile-nav">
         <ul>
-            <li><a href="index.html" class="active">About</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="index.html#section-five">Message</a></li>
+            <li><a href="index.php" class="active">Home</a></li>
+            <li><a href="about.php">About</a></li>
+            <li><a href="services.php" class="msg-btn">Services</a></li>
+            <?php
+            if (isset($_SESSION['id']) and ($_SESSION['id']) != '') {
+                echo '<li><a href="profile.php" class="msg-btn">Profile</a></li>';
+                echo '<li><a href="process/logout.inc.php" class="msg-btn">Logout</a></li>';
+            }
+            ?>
         </ul>
     </nav>
     <!-- end of navigation bar -->
@@ -74,7 +80,8 @@ session_start();
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-6">
-                        <h4></h4>
+                        <h3>Welcome to Salon Booking</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, nihil eveniet! Harum asperiores fuga libero inventore ad vero molestiae mollitia.</p>
                     </div>
                     <!-- <div class="col-sm-12 col-md-6 col-lg-6">
                         <img src="" alt="">
@@ -82,6 +89,9 @@ session_start();
                 </div>
             </div>
         </main>
+    </section>
+    <section id="about">
+                    
     </section>
 
 
