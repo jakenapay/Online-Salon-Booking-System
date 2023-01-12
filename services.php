@@ -26,13 +26,13 @@ session_start();
                     <h1 class="nav-logo">Test_logo </h1>
                 </a>
                 <ul class="menu">
-                    <li><a href="index.php" class="active">Home</a></li>
+                    <li><a href="index.php">Home</a></li>
                     <li><a href="about.php">About</a></li>
-                    <li><a href="services.php" class="msg-btn">Services</a></li>
+                    <li><a href="services.php" class="active">Services</a></li>
                     <?php
                     if (isset($_SESSION['id']) and ($_SESSION['id']) != '') {
-                        echo '<li><a href="profile.php">Profile</a></li>';
-                        echo '<li><a href="process/logout.inc.php">Logout</a></li>';
+                        echo '<li><a href="profile.php" class="msg-btn">Profile</a></li>';
+                        echo '<li><a href="process/logout.inc.php" class="msg-btn">Logout</a></li>';
                     }
                     ?>
                 </ul>
@@ -47,9 +47,9 @@ session_start();
     </header>
     <nav class="mobile-nav">
         <ul>
-            <li><a href="index.php" class="active">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="about.php">About</a></li>
-            <li><a href="services.php" class="msg-btn">Services</a></li>
+            <li><a href="services.php" class="active">Services</a></li>
             <?php
             if (isset($_SESSION['id']) and ($_SESSION['id']) != '') {
                 echo '<li><a href="profile.php">Profile</a></li>';
@@ -89,11 +89,6 @@ session_start();
                 </div>
             </div>
         </main>
-    </section>
-
-    <!-- Short info about your website -->
-    <section id="about">
-
     </section>
 
     <section id="service">

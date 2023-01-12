@@ -11,3 +11,52 @@
     display: flex;
     align-items: center;
 }
+
+section {
+    /* top bottom padding only */
+    padding: 2rem 0rem;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.service-name {
+    margin-bottom: 10px;
+}
+
+.service-price {
+    font-style: italic;
+    margin: 0;
+}
+
+.service {
+    background-color: #dadada;
+    padding: 1.5rem;
+    margin: 0.5rem;
+}
+
+.service-box {
+    padding: unset !important;
+}
+
+p.ellipsis {
+    max-height: 6em;
+    /* 5 lines at the set font-size */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    line-height: 1.2em;
+    /*set the line height */
+}
+
+p.ellipsis:after {
+    content: "...";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
