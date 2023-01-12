@@ -16,6 +16,7 @@ session_start();
     <!-- dont remove the php line -->
     <link rel="stylesheet" href="assets/css/index.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="assets/css/navbar.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="assets/css/services.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
@@ -95,6 +96,13 @@ session_start();
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <h3 class="section-title">Services</h3>
+                <span>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertNewServiceModal">
+                        Add New Service
+                    </button>
+                </span>
+
                 <div class="col-sm-12 col-sm-4 col-lg-3 service-box">
                     <div class="service">
                         <h3 class="service-name">
@@ -108,10 +116,63 @@ session_start();
                         </p>
                         <a href="serviceView.php?service_id=">View</a>
                     </div>
+                    <?php 
+                        if(isset($_SESSION['id']) and ($_SESSION['id'] != '')) {
+                            if(isset($_SESSION['typ']) and ($_SESSION['typ'] !='user')) {
+                            echo '<a href="service_edit.php?service_id=?" class="btn btn-warning">Update</a>';
+                            }
+                        }
+                    ?>
                 </div>
 
                 <div class="text-center mt-3">
-                    <a href="services.php">See more</a>
+
+                    <!-- modal for insert new service -->
+                    <!-- Modal -->
+                    <div class="modal fade" id="insertNewServiceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form action="process/services.inc.php" method="post">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- service_name -->
+                                        <div class="form-group">
+                                            <label for="service_name">Service Name</label>
+                                            <input type="text" class="form-control" id="service_name" name="service_name">
+                                        </div>
+                                        <!-- service_description -->
+                                        <div class="form-group">
+                                            <label for="service_desc">Service Description</label>
+                                            <textarea class="form-control" id="service_desc" name="service_desc" rows="3"></textarea>
+                                        </div>
+
+                                        <div clas="form-group">
+                                            <label for="service_price">Service Price</label>
+                                            <input type="number" class="form-control" id="service_price" name="service_price" min="0">
+                                        </div>
+
+                                        <!-- service_more_information -->
+                                        <div class="form-group">
+                                            <label for="service_more_info">More Information</label>
+                                            <textarea class="form-control" id="service_more_info" name="service_more_info" rows="3"></textarea>
+                                        </div>
+
+                                        <!-- Hidden attributes -->
+                                        <input type="hidden" id="adminName" name="adminName" value="<?php echo $_SESSION['id']; ?>">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <input type="submit" id="insertNewService" name="insertNewService" class="btn btn-primary" value="Save Changes">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -121,7 +182,16 @@ session_start();
 
     <!-- script bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="assets/js/navbar.js"></script>
+
+    <script>
+        $('#myModal').on('shown.bs.modal', function() {
+            $('#myInput').trigger('focus')
+        })
+    </script>
 </body>
 
 </html>

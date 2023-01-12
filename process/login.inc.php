@@ -28,6 +28,7 @@ if (isset($_POST['login'])) {
             $_SESSION['phn'] = $row['phone'];
             $_SESSION['un'] = $row['username'];
             $_SESSION['pw'] = $row['password'];
+            $_SESSION['typ'] = $row['type'];
             echo '<script>
         window.location.replace("../index.php");
         </script>';
