@@ -1,5 +1,18 @@
 <?php
 session_start();
+
+if (isset($_GET['del_service_id']) and ($_GET['del_service_id'] != '')) {
+
+    include 'process/config.inc.php';
+    $id = $_GET['del_service_id'];
+
+    $sql = "DELETE FROM salon.service WHERE service_id = '$id'";
+    if (mysqli_query($conn, $sql)) {
+        echo "Record deleted successfully";
+    } else {
+        echo "Error deleting record: " . mysqli_error($conn);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -61,21 +74,6 @@ session_start();
     </nav>
     <!-- end of navigation bar -->
 
-    <!-- start of contents  -->
-    <!-- <div class="container">
-        <p>Hi! Your name is <?php
-                            if (isset($_SESSION['id']) and ($_SESSION['id'] != '')) {
-                                echo $_SESSION['fn'] . " " . $_SESSION['ln'];
-                            } else {
-                                header("location: login.php");
-                            }
-                            ?>
-        </p>
-        <p>Your ID: <?php if (isset($_SESSION['id']) and ($_SESSION['id'] != '')) {
-                        echo $_SESSION['id'];
-                    }
-                    ?></p>
-    </div> -->
     <section id="header">
         <main>
             <div class="container">
@@ -96,34 +94,64 @@ session_start();
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <h3 class="section-title">Services</h3>
-                <span>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertNewServiceModal">
-                        Add New Service
-                    </button>
-                </span>
 
-                <div class="col-sm-12 col-sm-4 col-lg-3 service-box">
-                    <div class="service">
-                        <h3 class="service-name">
-                            Service_name
-                        </h3>
-                        <p class="service-price">Starts at 199</p>
-                        <p class="service-description ellipsis">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos praesentium pariatur cum minus quo sint tempore aut adipisci esse error?
+                <?php
+                if (isset($_SESSION['id']) and ($_SESSION['id'] != '')) {
+                    if (isset($_SESSION['typ']) and ($_SESSION['typ'] != 'user')) {
+                        echo '<span>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertNewServiceModal">
+                                    Add New Service
+                                </button>
+                            </span>';
+                    }
+                }
+                ?>
 
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus voluptates nulla totam doloremque illum omnis nihil rerum dignissimos, nostrum minus!
-                        </p>
-                        <a href="serviceView.php?service_id=">View</a>
-                    </div>
-                    <?php 
-                        if(isset($_SESSION['id']) and ($_SESSION['id'] != '')) {
-                            if(isset($_SESSION['typ']) and ($_SESSION['typ'] !='user')) {
-                            echo '<a href="service_edit.php?service_id=?" class="btn btn-warning">Update</a>';
-                            }
-                        }
-                    ?>
-                </div>
+
+                <?php
+                include 'process/config.inc.php';
+                $sql = "SELECT * FROM salon.service";
+                $result = mysqli_query($conn, $sql);
+
+                if (mysqli_num_rows($result) > 0) {
+                    // output data of each row
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $id = $row['service_id'];
+                        $name = $row['service_name'];
+                        $price = $row['service_price'];
+                        $description = $row['service_desc'];
+                        $info = $row['service_more_info'];
+                ?>
+                        <div class="col-sm-12 col-sm-4 col-lg-3 service-box">
+
+                            <div class="service">
+                                <h3 class="service-name">
+                                    <?php echo $name; ?>
+                                </h3>
+                                <p class="service-price">Starts at <?php echo $price; ?></p>
+                                <p class="service-description ellipsis">
+                                    <?php echo $description; ?>
+                                </p>
+                                <div class="d-flex justify-content-between">
+                                    <a href="serviceView.php?service_id=<?php echo $id; ?>">View</a>
+                                    <?php
+                                    if (isset($_SESSION['id']) and ($_SESSION['id'] != '')) {
+                                        if (isset($_SESSION['typ']) and ($_SESSION['typ'] != 'user')) {
+                                            echo '<a href="serviceEdit.php?service_id=' . $id . '">Edit</a>';
+                                            echo '<a href="services.php?del_service_id=' . $id . '">Delete</a>';
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+
+                        </div>
+                <?php
+                    }
+                } else {
+                    echo "0 results";
+                }
+                ?>
 
                 <div class="text-center mt-3">
 
@@ -143,27 +171,27 @@ session_start();
                                         <!-- service_name -->
                                         <div class="form-group">
                                             <label for="service_name">Service Name</label>
-                                            <input type="text" class="form-control" id="service_name" name="service_name">
+                                            <input type="text" class="form-control" id="service_name" name="service_name" required>
                                         </div>
+
+                                        <!-- service price -->
+                                        <div clas="form-group">
+                                            <label for="service_price">Service Price</label>
+                                            <input type="number" class="form-control" id="service_price" name="service_price" min="0" required>
+                                        </div>
+
                                         <!-- service_description -->
                                         <div class="form-group">
                                             <label for="service_desc">Service Description</label>
-                                            <textarea class="form-control" id="service_desc" name="service_desc" rows="3"></textarea>
-                                        </div>
-
-                                        <div clas="form-group">
-                                            <label for="service_price">Service Price</label>
-                                            <input type="number" class="form-control" id="service_price" name="service_price" min="0">
+                                            <textarea class="form-control" id="service_desc" name="service_desc" rows="3" required></textarea>
                                         </div>
 
                                         <!-- service_more_information -->
                                         <div class="form-group">
                                             <label for="service_more_info">More Information</label>
-                                            <textarea class="form-control" id="service_more_info" name="service_more_info" rows="3"></textarea>
+                                            <textarea class="form-control" id="service_more_info" name="service_more_info" rows="3" required></textarea>
                                         </div>
 
-                                        <!-- Hidden attributes -->
-                                        <input type="hidden" id="adminName" name="adminName" value="<?php echo $_SESSION['id']; ?>">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

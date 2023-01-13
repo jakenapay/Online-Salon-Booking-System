@@ -100,24 +100,53 @@ session_start();
         <div class="container">
             <div class="row d-flex align-items-center justify-content-center">
                 <h3 class="section-title">Services</h3>
-                <div class="col-sm-12 col-sm-4 col-lg-3 service-box">
-                    <div class="service">
-                        <h3 class="service-name">
-                            Service_name
-                        </h3>
-                        <p class="service-price">Starts at 199</p>
-                        <p class="service-description ellipsis">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos praesentium pariatur cum minus quo sint tempore aut adipisci esse error?
 
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus voluptates nulla totam doloremque illum omnis nihil rerum dignissimos, nostrum minus!
-                        </p>
-                        <a href="serviceView.php?service_id=">View</a>
-                    </div>
-                </div>
+                <?php
+                include 'process/config.inc.php';
+                $sql = "SELECT * FROM salon.service LIMIT 3";
+                $result = mysqli_query($conn, $sql);
 
-                <div class="text-center mt-3">
-                    <a href="services.php">See more</a>
-                </div>
+                if (mysqli_num_rows($result) > 0) {
+                    // output data of each row
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $id = $row['service_id'];
+                        $name = $row['service_name'];
+                        $price = $row['service_price'];
+                        $description = $row['service_desc'];
+                        $info = $row['service_more_info'];
+                ?>
+                        <div class="col-sm-12 col-sm-4 col-lg-3 service-box">
+
+                            <div class="service">
+                                <h3 class="service-name">
+                                    <?php echo $name; ?>
+                                </h3>
+                                <p class="service-price">Starts at <?php echo $price; ?></p>
+                                <p class="service-description ellipsis">
+                                    <?php echo $description; ?>
+                                </p>
+                                <div class="d-flex justify-content-between">
+                                    <a href="serviceView.php?service_id=<?php echo $id; ?>">View</a>
+                                    <?php
+                                    if (isset($_SESSION['id']) and ($_SESSION['id'] != '')) {
+                                        if (isset($_SESSION['typ']) and ($_SESSION['typ'] != 'user')) {
+                                            echo '<a href="serviceEdit.php?service_id=' . $id . '">Edit</a>';
+                                            echo '<a href="services.php?del_service_id=' . $id . '">Delete</a>';
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+
+                        </div>
+                <?php
+                    }
+                } else {
+                    echo "0 results";
+                }
+                ?>
+
+                <a href="services.php" class="text-center">See more</a>
             </div>
 
         </div>
