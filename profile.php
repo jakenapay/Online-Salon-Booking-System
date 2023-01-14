@@ -83,13 +83,37 @@ session_start();
     </div> -->
     <section id="header">
         <main>
+            <div class="container">
+                <div class="row d-flex justify-content-center align-items-start profile">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <h1 class="text-center mb-5">Profile</h1>
+                        <hr>
+                        <br>
+                        <h4>First Name: <?php echo $_SESSION['fn']; ?></h4>
+                        <h4>Last Name: <?php echo $_SESSION['ln']; ?></h4>
+
+                        <h5>Phone: <?php echo $_SESSION['phn']; ?></h4>
+                            <br>
+                            <hr>
+                            <br>
+                            <h4>Username: <?php echo $_SESSION['un']; ?></h4>
+                            <br>
+                            <hr>
+                            <br>
+                    </div>
+                </div>
+            </div>
         </main>
     </section>
+    <!-- $_SESSION["id"] = $row['id'];
+        $_SESSION['fn'] = $row['first_name'];
+        $_SESSION['ln'] = $row['last_name'];
+        $_SESSION['phn'] = $row['phone'];
+        $_SESSION['un'] = $row['username'];
+        $_SESSION['pw'] = $row['password'];
+        $_SESSION['typ'] = $row['type'];
+        -->
 
-    <!-- Short info about your website -->
-    <section id="about">
-
-    </section>
 
 
     <!-- script bootstrap -->

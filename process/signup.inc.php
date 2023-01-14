@@ -10,6 +10,7 @@ if (isset($_POST['signup'])) {
     $fn = $_POST['first_name'];
     $ln = $_POST['last_name'];
     $phn = $_POST['phone'];
+    $typ = 'user';
 
     $username = stripcslashes($un);
     $pw = stripcslashes($pw);
@@ -38,7 +39,7 @@ if (isset($_POST['signup'])) {
         exit();
     }
 
-    $sql = "INSERT INTO salon.users (first_name, last_name, phone, username, password, date_created) VALUES ('$fn', '$ln', '$phn', '$un', '$pw', now())";
+    $sql = "INSERT INTO salon.users (first_name, last_name, phone, username, password, type, date_created) VALUES ('$fn', '$ln', '$phn', '$un', '$pw', '$typ',now())";
 
     if ($conn->query($sql) === TRUE) {
         session_start();
@@ -46,6 +47,7 @@ if (isset($_POST['signup'])) {
         $_SESSION['ln'] = $ln;
         $_SESSION['un'] = $un;
         $_SESSION['phn'] = $phn;
+        $_SESSION['typ'] = $typ;
 
         echo '<script>
         alert("Sign up success");
