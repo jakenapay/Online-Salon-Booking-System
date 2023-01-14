@@ -18,3 +18,21 @@ if (isset($_POST['insertNewService'])) {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 }
+
+
+if (isset($_POST['update'])) {
+    include 'config.inc.php';
+
+    $sid = $_POST['service_id'];
+    $sname = $_POST['service_name'];
+    $sprice = $_POST['service_price'];
+    $sdesc = $_POST['service_desc'];
+    $sinfo = $_POST['service_more_info'];
+
+    $sql = "UPDATE salon.service SET service_name='$sname', service_price='$sprice', service_desc='$sdesc', service_more_info='$sinfo' WHERE service_id='$sid'";
+    if ($conn->query($sql) === TRUE) {
+        echo '<script>alert("Edit success");window.location.replace("../services.php")</script>';
+    } else {
+        echo "Error updating record: " . $conn->error;
+    }
+}

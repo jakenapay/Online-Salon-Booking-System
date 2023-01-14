@@ -32,6 +32,9 @@ session_start();
                     <?php
                     if (isset($_SESSION['id']) and ($_SESSION['id']) != '') {
                         echo '<li><a href="profile.php">Profile</a></li>';
+                        if (isset($_SESSION['typ']) and ($_SESSION['typ'] != 'user')) {
+                            echo '<li><a href="books.php">Bookings</a></li>';
+                        }
                         echo '<li><a href="process/logout.inc.php">Logout</a></li>';
                     }
                     ?>
@@ -53,6 +56,9 @@ session_start();
             <?php
             if (isset($_SESSION['id']) and ($_SESSION['id']) != '') {
                 echo '<li><a href="profile.php">Profile</a></li>';
+                if (isset($_SESSION['typ']) and ($_SESSION['typ'] != 'user')) {
+                    echo '<li><a href="books.php">Bookings</a></li>';
+                }
                 echo '<li><a href="process/logout.inc.php">Logout</a></li>';
             }
             ?>

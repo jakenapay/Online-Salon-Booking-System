@@ -37,7 +37,7 @@ if (isset($_POST['login'])) {
     } else {
         echo '<script>
         alert("Wrong email or password.");
-        window.location.replace("../signup.php");
+        window.location.replace("../login.php");
         </script>';
         exit();
     }
