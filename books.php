@@ -109,7 +109,7 @@ if (isset($_GET['b']) and ($_GET['b'] != '')) {
                             <?php
                             include 'process/config.inc.php';
 
-                            $sql = "SELECT b.booking_id, CONCAT(u.first_name, ' ', u.last_name) AS fullname, s.service_name, b.book_date FROM salon.bookings AS b INNER JOIN salon.users AS u ON b.user_id=u.id INNER JOIN salon.service AS s ON b.service_id=s.service_id;";
+                            $sql = "SELECT b.booking_id, CONCAT(u.first_name, ' ', u.last_name) AS fullname, s.service_name, b.book_date FROM salon.bookings AS b INNER JOIN salon.users AS u ON b.user_id=u.id INNER JOIN salon.service AS s ON b.service_id=s.service_id ORDER BY b.book_date DESC;";
                             $result = $conn->query($sql);
                             if ($result->num_rows > 0) {
                                 // output data of each row
